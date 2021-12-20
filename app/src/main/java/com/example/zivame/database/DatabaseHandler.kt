@@ -24,7 +24,7 @@ class DatabaseHandler(context: FragmentActivity?): SQLiteOpenHelper(context,DATA
         // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         //creating table with fields
         val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_NAME + " INTEGER PRIMARY KEY," + KEY_ID + " TEXT,"
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_EMAIL + " TEXT,"
                 + KEY_PRICE + " TEXT" + ")")
         db?.execSQL(CREATE_CONTACTS_TABLE)
@@ -45,7 +45,7 @@ class DatabaseHandler(context: FragmentActivity?): SQLiteOpenHelper(context,DATA
         contentValues.put(KEY_NAME, cart.userName)
         contentValues.put(KEY_PRICE,cart.price)
         contentValues.put(KEY_EMAIL,cart.userEmail)
-         // EmpModelClass Phone
+
         // Inserting Row
         val success = db.insert(TABLE_CONTACTS, null, contentValues)
         //2nd argument is String containing nullColumnHack
@@ -88,8 +88,8 @@ class DatabaseHandler(context: FragmentActivity?): SQLiteOpenHelper(context,DATA
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, cart.userId)
-        contentValues.put(KEY_NAME, cart.userName) // EmpModelClass Name
-        contentValues.put(KEY_EMAIL,cart.userEmail ) // EmpModelClass Email
+        contentValues.put(KEY_NAME, cart.userName)
+        contentValues.put(KEY_EMAIL,cart.userEmail )
 
         // Updating Row
         val success = db.update(TABLE_CONTACTS, contentValues,"id="+cart.userId,null)

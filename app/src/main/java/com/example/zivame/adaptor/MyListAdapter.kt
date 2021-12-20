@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zivame.R
 import com.example.zivame.model.CartModelClass
@@ -22,10 +23,11 @@ class MyListAdapter(private val productList: List<CartModelClass>, private val c
 
 
         var imageView = itemView.findViewById<ImageView>(R.id.ivFlag)
-        var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
-        var tvCases = itemView.findViewById<TextView>(R.id.tvCases)
+        var tvTitle = itemView.findViewById<TextView>(R.id.productTitle)
+        var tvCases = itemView.findViewById<TextView>(R.id.price)
+        var cart_item = itemView.findViewById<ImageView>(R.id.cart_item)
         fun bind(products: CartModelClass) {
-
+            cart_item.isVisible = false
             val name ="Cases :${products.userName}"
             tvTitle.text = products.userName
             tvCases.text = products.price

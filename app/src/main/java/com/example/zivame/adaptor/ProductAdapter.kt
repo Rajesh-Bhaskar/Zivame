@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zivame.R
-import com.example.zivame.model.CellClickListener
-import com.example.zivame.model.Product
 import com.example.zivame.model.Products
 import com.squareup.picasso.Picasso
 
@@ -41,8 +40,9 @@ class ProductAdapter(private val productList: List<Products>,private val cellCli
 
 
         var imageView = itemView.findViewById<ImageView>(R.id.ivFlag)
-        var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
-        var tvCases = itemView.findViewById<TextView>(R.id.tvCases)
+        var tvTitle = itemView.findViewById<TextView>(R.id.productTitle)
+        var tvCases = itemView.findViewById<TextView>(R.id.price)
+
         fun bind(products: Products) {
 
             val name ="Cases :${products.name}"

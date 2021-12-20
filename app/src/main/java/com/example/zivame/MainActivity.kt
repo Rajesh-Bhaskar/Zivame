@@ -1,6 +1,7 @@
 package com.example.zivame
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,12 +39,11 @@ class MainActivity : AppCompatActivity(), CellClickListener {
 
     }
     fun viewRecord(view: View){
-        val homeFragment = CartFragment()
             //details_fragment.isVisible = true
         // initial transaction should be wrapped like this
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.details_fragment, homeFragment)
-                .commitAllowingStateLoss()
+        Intent(this, CartActivity::class.java).apply {
+            startActivity(this)
+        }
     }
     @SuppressLint("ResourceType")
     private fun loadcartitem() {
@@ -51,17 +51,17 @@ class MainActivity : AppCompatActivity(), CellClickListener {
         val databaseHandler: DatabaseHandler= DatabaseHandler(this)
         val cart: List<CartModelClass> = databaseHandler.viewItemsincart()
         if (cart.size == 0){
-            id= 1
+            id= 0
             cartempty.isVisible = false
             cart_item.isVisible = true
             items_count.isVisible = true
-            items_count.setText("1")
+            items_count.setText("0")
         }else{
-            id= cart.size+1
+            id= cart.size
             cartempty.isVisible = false
             cart_item.isVisible = true
             items_count.isVisible = true
-            items_count.setText((cart.size+1).toString())
+            items_count.setText((cart.size).toString())
         }
     }
 
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity(), CellClickListener {
     }
 
     override fun onCellClickListener(product: Products) {
-        Toast.makeText(this,"Cell clicked  :"+product.toString(), Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this,"Cell clicked  :"+product.toString(), Toast.LENGTH_SHORT).show()
         saveRecord(product)
     }
 
@@ -104,8 +104,17 @@ class MainActivity : AppCompatActivity(), CellClickListener {
         var id = 0
         val databaseHandler: DatabaseHandler= DatabaseHandler(this)
         val cart: List<CartModelClass> = databaseHandler.viewItemsincart()
-
-        items_count.setText(id)
+        if (cart.size == 0){
+            id= 1
+            cartempty.isVisible = false
+            cart_item.isVisible = true
+            items_count.isVisible = true
+        }else{
+            id= cart.size+1
+            cartempty.isVisible = false
+            cart_item.isVisible = true
+            items_count.isVisible = true
+        }
         val name = product.name
         val email = product.image_url
         val price = product.price
@@ -113,7 +122,7 @@ class MainActivity : AppCompatActivity(), CellClickListener {
         if( name.trim()!="" && email.trim()!=""){
             val status = databaseHandler.addItem(CartModelClass(Integer.parseInt(id.toString()),name, email,price))
             if(status > -1){
-                Toast.makeText(applicationContext,"record save",Toast.LENGTH_LONG).show()
+               // Toast.makeText(applicationContext,"record save",Toast.LENGTH_LONG).show()
                 if (cart.size == 0){
                     id= 1
                     cartempty.isVisible = false
@@ -127,6 +136,9 @@ class MainActivity : AppCompatActivity(), CellClickListener {
                     items_count.isVisible = true
                     items_count.setText((cart.size+1).toString())
                 }
+
+                Toast.makeText(this@MainActivity, " ${name} was added to cart", Toast.LENGTH_SHORT).show()
+
             }
         }else{
             Toast.makeText(applicationContext,"id or name or email cannot be blank",Toast.LENGTH_LONG).show()

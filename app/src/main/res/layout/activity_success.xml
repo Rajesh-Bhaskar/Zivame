@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screenbackground">
+<ImageView
+    android:id="@+id/checkbox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/check"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="55dp"/>
+    <TextView
+        android:id="@+id/congradulation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Congradulations"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:layout_below="@+id/checkbox"
+        android:layout_centerInParent="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your order has been placed "
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/congradulation"
+        android:layout_centerInParent="true"
+        />
+
+
+    <TextView
+        android:id="@+id/checkout_btn"
+        style="@style/rounded_gradient_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:onClick="continueShopping"
+        android:text="@string/Continue" />
+</RelativeLayout>
