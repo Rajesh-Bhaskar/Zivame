@@ -31,8 +31,8 @@ class CartFragment  : Fragment() ,CellCartClickListener{
     fun viewRecord(view: View){
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler= DatabaseHandler(activity)
-        //calling the viewEmployee method of DatabaseHandler class to read the records
-        val cart: List<CartModelClass> = databaseHandler.viewEmployee()
+
+        val cart: List<CartModelClass> = databaseHandler.viewItemsincart()
         val empArrayId = Array<String>(cart.size){"0"}
         val empArrayName = Array<String>(cart.size){"null"}
         val empArrayEmail = Array<String>(cart.size){"null"}

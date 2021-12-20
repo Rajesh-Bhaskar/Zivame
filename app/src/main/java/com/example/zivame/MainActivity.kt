@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), CellClickListener {
     private fun loadcartitem() {
         var id = 0
         val databaseHandler: DatabaseHandler= DatabaseHandler(this)
-        val cart: List<CartModelClass> = databaseHandler.viewEmployee()
+        val cart: List<CartModelClass> = databaseHandler.viewItemsincart()
         if (cart.size == 0){
             id= 1
             cartempty.isVisible = false
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity(), CellClickListener {
     fun saveRecord(product: Products){
         var id = 0
         val databaseHandler: DatabaseHandler= DatabaseHandler(this)
-        val cart: List<CartModelClass> = databaseHandler.viewEmployee()
+        val cart: List<CartModelClass> = databaseHandler.viewItemsincart()
 
         items_count.setText(id)
         val name = product.name
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), CellClickListener {
         val price = product.price
       //  val image_url = product.image_url
         if( name.trim()!="" && email.trim()!=""){
-            val status = databaseHandler.addEmployee(CartModelClass(Integer.parseInt(id.toString()),name, email,price))
+            val status = databaseHandler.addItem(CartModelClass(Integer.parseInt(id.toString()),name, email,price))
             if(status > -1){
                 Toast.makeText(applicationContext,"record save",Toast.LENGTH_LONG).show()
                 if (cart.size == 0){

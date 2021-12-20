@@ -13,8 +13,8 @@ import androidx.fragment.app.FragmentActivity
 class DatabaseHandler(context: FragmentActivity?): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object {
         private val DATABASE_VERSION = 1
-        private val DATABASE_NAME = "EmployeeDatabase"
-        private val TABLE_CONTACTS = "EmployeeTable"
+        private val DATABASE_NAME = "CartDatabase"
+        private val TABLE_CONTACTS = "CartTable"
         private val KEY_ID = "id"
         private val KEY_NAME = "name"
         private val KEY_EMAIL = "email"
@@ -38,7 +38,7 @@ class DatabaseHandler(context: FragmentActivity?): SQLiteOpenHelper(context,DATA
 
 
     //method to insert data
-    fun addEmployee(cart: CartModelClass):Long{
+    fun addItem(cart: CartModelClass):Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, cart.userId)
@@ -54,7 +54,7 @@ class DatabaseHandler(context: FragmentActivity?): SQLiteOpenHelper(context,DATA
     }
     //method to read data
     @SuppressLint("Range")
-    fun viewEmployee():List<CartModelClass>{
+    fun viewItemsincart():List<CartModelClass>{
         val cartList:ArrayList<CartModelClass> = ArrayList<CartModelClass>()
         val selectQuery = "SELECT  * FROM $TABLE_CONTACTS"
         val db = this.readableDatabase
@@ -84,7 +84,7 @@ class DatabaseHandler(context: FragmentActivity?): SQLiteOpenHelper(context,DATA
         return cartList
     }
     //method to update data
-    fun updateEmployee(cart: CartModelClass):Int{
+    fun updateCart(cart: CartModelClass):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, cart.userId)
@@ -98,7 +98,7 @@ class DatabaseHandler(context: FragmentActivity?): SQLiteOpenHelper(context,DATA
         return success
     }
     //method to delete data
-    fun deleteEmployee(cart: CartModelClass):Int{
+    fun deleteCart(cart: CartModelClass):Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_ID, cart.userId) // EmpModelClass UserId
