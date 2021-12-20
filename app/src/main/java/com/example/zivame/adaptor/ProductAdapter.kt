@@ -8,10 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zivame.R
+import com.example.zivame.model.CellClickListener
+import com.example.zivame.model.Product
 import com.example.zivame.model.Products
 import com.squareup.picasso.Picasso
 
-class ProductAdapter(private val productList: List<Products>) :RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(private val productList: List<Products>,private val cellClickListener: (Products) -> Unit) :RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -26,11 +28,12 @@ class ProductAdapter(private val productList: List<Products>) :RecyclerView.Adap
 
 
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.d("Response", "List Count :${productList.size} ")
 
-
+        holder.itemView.setOnClickListener {
+            cellClickListener(productList[position])
+        }
         return holder.bind(productList[position])
 
     }
